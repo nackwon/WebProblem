@@ -1,10 +1,8 @@
 <%@page import="kr.co.bit.day3.FunctionEX"%>
+<%@page import="java.io.File"%>
+<%@page import="kr.co.bit.day3.Student"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="java.io.BufferedReader"%>
-<%@page import="java.io.FileReader"%>
-<%@page import="kr.co.bit.day3.Student"%>
-<%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,15 +13,29 @@
 </head>
 <body>
 	<%
-		String path = application.getRealPath("WEB-INF/file/Abc1115.txt");
-		File file = new File(path);
-		//1.파일을 읽어들이기 
+		List<Student> list = (ArrayList<Student>) session.getAttribute("list");
 		FunctionEX func = new FunctionEX();
-		List<Student> list = new ArrayList<Student>();
-		list = func.read(file);
-
-		session.setAttribute("list", list);
-		response.sendRedirect("result.jsp");
+		int count;
+		func.problem01(list);
+		
 	%>
+	<table>
+		<tr>
+			<td>문제1</td>
+			<td>문제2</td>
+			<td>문제3</td>
+			<td>문제4</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><%
+			count = func.problem03(list);
+			out.print(count); %></td>
+			<td><%
+			count = func.problem04(list,"B");
+			out.print(count); %></td>
+		</tr>
+	</table>
 </body>
 </html>
